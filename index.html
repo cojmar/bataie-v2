@@ -18,7 +18,7 @@
     }
     body {
       display: flex;
-      width: 100vw; height: 100vh; height: 100dvh; height: 100svh;
+      width: 100vw; height: 100svh; height: 100dvh; height: 100vh;
     }
     .container {
       width: 100%; height: 100%;
@@ -85,6 +85,23 @@
       transition: all 0.3s; text-transform: uppercase; width: 100%;
     }
     .btn-start:hover { background: rgba(255,215,0,0.35); transform: translateY(-2px); }
+    .btn-fullscreen {
+      padding: 8px 16px; border: 2px solid #ffd700; border-radius: 8px;
+      background: rgba(255,215,0,0.1); color: #ffd700;
+      font-size: 0.8em; font-weight: bold; cursor: pointer;
+      transition: all 0.3s; text-transform: uppercase; width: 100%;
+      margin-top: 4px;
+    }
+    .btn-fullscreen:hover { background: rgba(255,215,0,0.25); }
+    .btn-quit {
+      position: absolute; top: 8px; right: 8px; z-index: 20;
+      padding: 6px 12px; border: 2px solid #e74c3c; border-radius: 8px;
+      background: rgba(231,76,60,0.15); color: #e74c3c;
+      font-size: 0.7em; font-weight: bold; cursor: pointer;
+      text-transform: uppercase; pointer-events: auto;
+      display: none;
+    }
+    .btn-quit:hover { background: rgba(231,76,60,0.3); }
     .main-area {
       flex: 1; width: 100%; height: 100%; position: relative;
       overflow: hidden; display: flex; flex-direction: column;
@@ -294,20 +311,17 @@
         <button class="carousel-btn" onclick="nextClass()">▶</button>
       </div>
       <div class="class-card selected" id="class-card">
-        <div class="class-icon" id="class-icon">⚔️</div>
-        <div class="class-name" id="class-card-name">Warrior</div>
-        <div class="class-stats">
-          <span class="stat hp" id="stat-hp">HP: 120</span>
-          <span class="stat atk" id="stat-atk">ATK: 22</span>
-          <span class="stat spd" id="stat-spd">SPD: 8</span>
-        </div>
-        <div class="class-skills" id="class-skills">
-          <span class="s">S1</span> Shield Bash<br>
-          <span class="s">S2</span> Sword Slash
-        </div>
-        <div class="controls-section" id="controls-section"></div>
-      </div>
+         <div class="class-icon" id="class-icon">⚔️</div>
+         <div class="class-name" id="class-card-name">Warrior</div>
+         <div class="class-stats">
+           <span class="stat hp" id="stat-hp">HP: 120</span>
+           <span class="stat atk" id="stat-atk">ATK: 22</span>
+           <span class="stat spd" id="stat-spd">SPD: 8</span>
+         </div>
+         <div class="controls-section" id="controls-section"></div>
+       </div>
       <button class="btn-start" id="btn-start" onclick="startGame()">🎮 START GAME</button>
+      <button class="btn-fullscreen" id="btn-fullscreen" onclick="toggleFullscreen()">⛶ FULLSCREEN</button>
     </div>
 
     <div class="main-area" id="main-area">
@@ -744,6 +758,9 @@
       document.getElementById('cd-ring').classList.add('visible');
       document.getElementById('compact-log').classList.add('visible');
       addLog('⚔️ Fight started! Tap ground to move, tap enemies to attack!', 'player');
+      if (document.documentElement.requestFullscreen && /Mobi|Android/i.test(navigator.userAgent)) {
+        document.documentElement.requestFullscreen().catch(()=>{});
+      }
     }
 
     function showDeathScreen() {
@@ -844,14 +861,12 @@
     function updateClassCarousel() {
       selectedClass = classes[currentCarouselIndex];
       const cd = CLASS_DATA[selectedClass];
-      document.getElementById('current-class-name').textContent = cd.icon + ' ' + cd.name;
+      document.getElementById('current-class-name').textContent = cd.name;
       document.getElementById('class-icon').textContent = cd.icon;
       document.getElementById('class-card-name').textContent = cd.name;
       document.getElementById('stat-hp').textContent = 'HP: ' + cd.hp;
       document.getElementById('stat-atk').textContent = 'ATK: ' + cd.atk;
       document.getElementById('stat-spd').textContent = 'SPD: ' + cd.spd;
-      document.getElementById('class-skills').innerHTML =
-        `<span class="s">S1</span> ${cd.s1Name}<br><span class="s">S2</span> ${cd.s2Name} (1s CD)`;
       document.getElementById('s1-label').textContent =
         (selectedClass==='warrior'?'🛡️':selectedClass==='mage'?'🔮':selectedClass==='archer'?'🏹':'✨') +
         ' S1: ' + cd.s1Name;

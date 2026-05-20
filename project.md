@@ -109,64 +109,7 @@ These are rendered in **Layer 2** (background layer), below entities. The foliag
 
 ## Active Tasks
 
-> **New Workflow:** Tasks are done **automatically, one at a time**. After finishing a task, I will move to the next without asking for confirmation. I will save progress in project.md. When all tasks are done, I will notify you to review. **No git commits during tasks.** Final review only.
-
-### Task 1 — Add `info.md` and show gameplay controls/stats on character selection screen
-
-**Goal:** Create `info.md` file + show class controls and stats on the character selection screen.
-
-**Details:**
-- Created `info.md` with gameplay guide, controls, class stats, skill descriptions
-- Added `.controls-section` div to class card showing S1/S2 triggers, names, and descriptions
-- Updated `drawMenuBackground()` canvas to show compact controls text below "Select Class"
-- `.controls-section`: font-size `0.9em`, `text-align: left`, `color: #ddd`, left-aligned skills info
-- `.class-skills`: `text-align: left`, `font-size: 0.7em`
-- `.class-card`: `justify-content: flex-start`, `align-items: flex-end`
-- Removed all border-radius from menu elements (flat design)
-
-**Status:** 🟢 DONE — font-size increased to 0.9em, text-left aligned, flat design applied
-
----
-
-### Task 2 — Mobile-first layout: works on mobile in portrait and landscape
-
-**Goal:** Ensure the website is mobile-first and works correctly on mobile in both orientations.
-
-**Details:**
-- Review and update CSS to be mobile-first (base styles for mobile, breakpoints for larger screens)
-- Test and fix layout in portrait mode on mobile
-- Test and fix layout in landscape mode on mobile
-- Ensure touch targets are appropriately sized for mobile
-- Ensure canvas/game area scales and positions correctly in both orientations
-
-**Status:** 🟢 DONE
-
----
-
-### Task 3 — Remove `<h3>⚔️ Select Your Character</h3>` heading from character selection screen
-
-**Goal:** Remove the `<h3>⚔️ Select Your Character</h3>` heading as it takes up space for no reason.
-
-**Details:**
-- Removed the `<h3>` element from the character selection screen HTML
-- Layout adjusted to compensate for the removed space
-
-**Status:** 🟢 DONE
-
----
-
-### Task 4 — Remove duplicate class icon from character name in carousel
-
-**Goal:** Remove class icon from carousel area where class names appear between arrows (duplicate of icon shown in class details below).
-
-**Details:**
-- Removed the class icon from `#current-class-name` in the carousel nav
-- Kept only the class name text between the ◀ ▶ arrows
-- The class icon remains in the class card below
-
-**Status:** 🟢 DONE
-
----
+> **Workflow:** Tasks are done automatically, one at a time. After finishing, the next starts without confirmation. Progress saved in project.md. No commits during tasks — final review only.
 
 ### Task 5 — Mobile-first class info: explain both skills of selected class
 
@@ -179,7 +122,7 @@ These are rendered in **Layer 2** (background layer), below entities. The foliag
 - Mobile-first layout: reads well in portrait mode on mobile
 - Clean, readable, appropriately sized
 
-**Status:** 🟢 PARTIALLY DONE — already implemented in Task 1, but needs mobile-first refinement in a later session
+**Status:** 🔴 NOT STARTED
 
 ---
 
