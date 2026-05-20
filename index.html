@@ -18,20 +18,21 @@
     }
     body {
       display: flex;
-      width: 100vw; height: 100dvh; height: 100svh; height: 100vh;
-      height: 100 * max(100dvh, 100svh, 100vh);
+      width: 100vw; height: 100vh; height: 100dvh; height: 100svh;
     }
     .container {
       width: 100%; height: 100%;
-      display: flex; flex-direction: row;
+      display: flex; flex-direction: column;
       position: relative; overflow: hidden;
     }
     .menu-panel {
-      width: 270px; min-width: 270px;
+      width: 100%;
+      max-height: 45vh;
+      min-height: 160px;
       background: rgba(255,255,255,0.04);
-      border-right: 2px solid #4a4a6a;
-      padding: 14px 16px; display: flex; flex-direction: column;
-      gap: 12px; z-index: 10; overflow-y: auto; flex-shrink: 0;
+      border-bottom: 2px solid #4a4a6a;
+      padding: 10px 14px; display: flex; flex-direction: column;
+      gap: 8px; z-index: 10; overflow-y: auto; flex-shrink: 0;
     }
     .menu-panel.hidden { display: none !important; }
     .menu-panel h3 {
@@ -55,22 +56,28 @@
     }
     .carousel-title { color: #ffd700; font-weight: bold; }
     .class-card {
-      border: 2px solid #4a4a6a; border-radius: 10px;
+      border: 2px solid #4a4a6a;
       background: rgba(255,255,255,0.03); padding: 10px;
       flex: 1; display: flex; flex-direction: column;
-      justify-content: center; align-items: center; gap: 5px;
+      justify-content: flex-start; align-items: flex-end; gap: 4px;
       transition: border-color 0.3s;
     }
     .class-card.selected { border-color: #ffd700; }
     .class-icon { font-size: 2.2em; line-height: 1; }
     .class-name { font-size: 1.05em; font-weight: bold; color: #ffd700; text-transform: uppercase; }
     .class-stats { display: flex; gap: 4px; font-size: 0.68em; }
-    .class-stats .stat { padding: 2px 6px; border-radius: 5px; font-weight: bold; }
+    .class-stats .stat { padding: 2px 6px; font-weight: bold; }
     .class-stats .stat.hp { background: rgba(231,76,60,0.3); }
     .class-stats .stat.atk { background: rgba(52,152,219,0.3); }
     .class-stats .stat.spd { background: rgba(155,89,182,0.3); }
-    .class-skills { font-size: 0.65em; text-align: center; line-height: 1.5; color: #aaa; }
-    .class-skills .s { color: #ffd700; font-weight: bold; }
+      .class-skills { font-size: 0.7em; text-align: left; line-height: 1.4; color: #aaa; }
+        .class-skills .s { color: #ffd700; font-weight: bold; }
+         .class-controls { font-size: 0.5em; text-align: center; line-height: 1.6; color: #999; }
+         .class-controls .ctrl-key { color: #ffd700; font-weight: bold; }
+         .controls-section { display: block; font-size: 0.9em; text-align: left; line-height: 1.6; color: #ddd; padding: 8px 4px; border-top: 1px solid #4a4a6a; margin-top: 2px; }
+         .controls-section .ctrl-line { margin-bottom: 4px; }
+         .controls-section .ctrl-label { color: #ffd700; font-weight: bold; }
+         .controls-section .s { color: #ffd700; font-weight: bold; }
     .btn-start {
       padding: 12px 30px; border: 2px solid #ffd700; border-radius: 8px;
       background: rgba(255,215,0,0.15); color: #ffd700;
@@ -220,77 +227,70 @@
     }
     .walk-indicator.visible { opacity: 1; }
 
-    @media (max-aspect-ratio: 1/1), (max-width: 600px) {
-      body { flex-direction: column; }
-      .container { flex-direction: column; }
+    @media (orientation: landscape) and (max-height: 500px) {
       .menu-panel {
-        width: 100%; min-width: 0; max-height: 42vh; min-height: 180px;
-        padding: 8px 12px; gap: 8px; border-right: none;
-        border-bottom: 2px solid #4a4a6a; order: 1; overflow-y: auto;
+        max-height: 55vh;
+        min-height: 120px;
+        padding: 6px 10px;
+        gap: 6px;
       }
-      .menu-panel.hidden { display: none !important; }
-      .menu-panel h3 { font-size: 0.75em; }
-      .carousel-btn { min-width: 44px; min-height: 44px; font-size: 1.4em; }
-      .class-icon { font-size: 1.8em; }
-      .class-name { font-size: 0.85em; }
+      .class-icon { font-size: 1.6em; }
+      .class-name { font-size: 0.8em; }
       .class-stats { font-size: 0.6em; }
-      .class-skills { font-size: 0.55em; }
-      .btn-start { padding: 10px 16px; font-size: 0.8em; }
-      .main-area { width: 100%; flex: 1; min-height: 0; order: 2; }
-      .hud { padding: 6px 8px; flex-wrap: wrap; gap: 3px; }
-      .hp-container { min-width: 0; flex: 1; padding: 5px 8px; }
-      .score-display { padding: 5px 8px; }
-      .skill-indicator { padding: 4px 8px; font-size: 0.6em; }
-      .hp-text { font-size: 0.65em; }
-      .score-display .kills { font-size: 0.7em; }
-      .score-display .level { font-size: 0.6em; }
-      .cooldown-ring { bottom: 30px; right: 10px; width: 40px; height: 40px; }
-      .compact-log { width: 94vw; bottom: 6px; padding: 5px 8px; }
-      .compact-log .log-content { font-size: 0.7em; }
-      .death-overlay h2 { font-size: 1.6em; }
-      .death-overlay p { font-size: 0.85em; }
-      .death-overlay .btn-restart { padding: 10px 36px; font-size: 0.9em; }
-      .boss-warning { font-size: 1.2em; }
-      .env-banner { font-size: 1.1em; }
-      .walk-indicator { bottom: 50px; font-size: 0.75em; }
+      .controls-section { font-size: 0.75em; }
+      .btn-start { padding: 8px 16px; font-size: 0.85em; }
+      .carousel-btn { min-width: 36px; min-height: 36px; font-size: 1.3em; }
     }
 
-    @media (orientation: landscape) and (max-height: 500px) {
+    @media (min-width: 768px) {
       .container { flex-direction: row; }
       .menu-panel {
-        width: 200px; max-width: 25vw; min-width: 160px;
-        max-height: 100%; padding: 6px 10px;
+        width: 260px;
+        min-width: 260px;
+        max-height: none;
+        min-height: auto;
+        border-bottom: none;
+        border-right: 2px solid #4a4a6a;
+        padding: 14px 16px;
+        gap: 12px;
       }
-      .carousel-btn { min-width: 32px; min-height: 32px; font-size: 1.2em; }
-      .class-icon { font-size: 1.4em; }
-      .class-name { font-size: 0.75em; }
-      .class-stats { font-size: 0.52em; }
-      .class-skills { font-size: 0.5em; }
-      .btn-start { padding: 6px 12px; font-size: 0.75em; }
-      .hud { padding: 4px 6px; }
-      .hp-container { min-width: 0; padding: 4px 6px; }
-      .score-display { padding: 4px 6px; }
-      .skill-indicator { padding: 3px 6px; font-size: 0.55em; }
-      .hp-text { font-size: 0.6em; }
-      .score-display .kills { font-size: 0.65em; }
-      .score-display .level { font-size: 0.55em; }
-      .cooldown-ring { bottom: 10px; right: 10px; width: 36px; height: 36px; }
-      .compact-log { bottom: 4px; width: 80vw; }
-      .walk-indicator { bottom: 30px; }
+      .main-area { flex: 1; }
+      .carousel-btn { min-width: 44px; min-height: 44px; font-size: 1.5em; }
+      .class-icon { font-size: 2em; }
+      .class-name { font-size: 1em; }
+      .class-stats { font-size: 0.68em; }
+      .controls-section { font-size: 0.85em; }
+      .btn-start { padding: 12px 30px; font-size: 1em; }
+      .hud { padding: 12px 16px; }
+      .hp-container { padding: 8px 12px; min-width: 200px; }
+      .score-display { padding: 8px 14px; }
+      .skill-indicator { padding: 8px 14px; font-size: 0.72em; }
+      .hp-text { font-size: 0.78em; }
+      .score-display .kills { font-size: 0.9em; }
+      .score-display .level { font-size: 0.75em; }
+      .cooldown-ring { bottom: 60px; right: 20px; width: 56px; height: 56px; }
+      .compact-log { width: 340px; bottom: 12px; padding: 6px 10px; }
+      .compact-log .log-content { font-size: 0.78em; }
+      .walk-indicator { bottom: 80px; font-size: 0.85em; }
     }
 
-    @media (min-aspect-ratio: 2/1) {
-      .menu-panel { width: 240px; min-width: 200px; }
+    @media (min-width: 1024px) {
+      .menu-panel { width: 280px; min-width: 280px; padding: 16px 18px; }
+      .hud { padding: 14px 20px; }
+      .hp-container { padding: 10px 14px; min-width: 220px; }
+      .score-display { padding: 10px 16px; }
+      .skill-indicator { padding: 10px 16px; font-size: 0.78em; }
+      .compact-log { width: 400px; bottom: 16px; }
+      .walk-indicator { bottom: 90px; font-size: 0.9em; }
     }
   </style>
 </head>
 <body>
   <div class="container" id="container">
     <div class="menu-panel" id="menu-panel">
-      <h3>⚔️ Select Your Character</h3>
       <div class="carousel-nav">
         <button class="carousel-btn" onclick="prevClass()">◀</button>
-        <span class="carousel-title" style="color:#ffd700; font-weight:bold;" id="current-class-name">⚔️ Warrior</span>
+        <span class="carousel-title" id="current-class-name">Warrior</span>
         <button class="carousel-btn" onclick="nextClass()">▶</button>
       </div>
       <div class="class-card selected" id="class-card">
@@ -305,12 +305,13 @@
           <span class="s">S1</span> Shield Bash<br>
           <span class="s">S2</span> Sword Slash
         </div>
+        <div class="controls-section" id="controls-section"></div>
       </div>
       <button class="btn-start" id="btn-start" onclick="startGame()">🎮 START GAME</button>
     </div>
 
     <div class="main-area" id="main-area">
-      <canvas id="game-canvas"></canvas>
+      <canvas id="game-canvas" style="display:none;"></canvas>
       <div class="hud" id="hud">
         <div class="hud-left">
           <div class="hp-container">
@@ -728,11 +729,15 @@
       gameState = 'PLAYING';
       gameActive = true;
       resetGame();
+      updateHUD();
       document.getElementById('menu-panel').classList.add('hidden');
+      const canvas = document.getElementById('game-canvas');
+      canvas.style.display = 'block';
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           refreshCanvasRect();
           updateLayout();
+          canvas.style.display = 'block';
         });
       });
       document.getElementById('hud').classList.add('visible');
@@ -758,6 +763,7 @@
       document.getElementById('compact-log').classList.remove('visible');
       document.getElementById('walk-indicator').classList.remove('visible');
       document.getElementById('menu-panel').classList.remove('hidden');
+      document.getElementById('game-canvas').style.display = 'none';
       gameState = 'MENU';
       gameActive = false;
       enemies = [];
@@ -782,7 +788,7 @@
       drawMenuBackground();
     }
 
-    function drawMenuBackground() {
+    function  drawMenuBackground() {
       const env = ENV_CONFIG[selectedEnv];
       applyViewport();
       const skyGrad = ctx.createLinearGradient(0, 0, 0, GAME_H);
@@ -794,11 +800,16 @@
       const gY = GAME_H * env.groundY;
       ctx.fillStyle = env.ground;
       ctx.fillRect(0, gY, GAME_W, GAME_H - gY);
-      ctx.fillStyle = 'rgba(255,215,0,0.15)';
-      ctx.font = 'bold 36px sans-serif';
+      // Compact controls text
+      ctx.fillStyle = 'rgba(255,215,0,0.2)';
+      ctx.font = 'bold 24px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('🎮 SELECT CLASS & PRESS START', GAME_W / 2, GAME_H / 2);
+      ctx.fillStyle = 'rgba(200,200,200,0.15)';
+      ctx.font = '11px sans-serif';
+      const sk = SKILL_DESC[selectedClass];
+      ctx.fillText(`S1: ${sk.s1.ctrl} → ${sk.s1.name} | S2: ${sk.s2.ctrl} → ${sk.s2.name} (1s CD)`, GAME_W / 2, GAME_H / 2 + 30);
       ctx.textBaseline = 'alphabetic';
       ctx.setTransform(window.devicePixelRatio || 1, 0, 0, window.devicePixelRatio || 1, 0, 0);
     }
@@ -811,6 +822,25 @@
       currentCarouselIndex = (currentCarouselIndex - 1 + classes.length) % classes.length;
       updateClassCarousel();
     }
+    const SKILL_DESC = {
+      warrior: {
+        s1: { name: 'Shield Bash', desc: 'Wide arc strike. 100% ATK + knockback.', ctrl: 'Left-click enemy' },
+        s2: { name: 'Sword Slash', desc: 'Shockwave projectile. 250% ATK + knockback.', ctrl: 'Right-click / long-press' }
+      },
+      mage: {
+        s1: { name: 'Magic Bolt', desc: 'Fast bolt. 90% ATK single-target.', ctrl: 'Left-click enemy' },
+        s2: { name: 'Fireball', desc: 'Exploding AoE fireball. 220% ATK.', ctrl: 'Right-click / long-press' }
+      },
+      archer: {
+        s1: { name: 'Quick Shot', desc: 'Fast arrow. 95% ATK, 15% crit.', ctrl: 'Left-click enemy' },
+        s2: { name: 'Arrow Barrage', desc: '3 arrows spread. 130% ATK each.', ctrl: 'Right-click / long-press' }
+      },
+      magicgladiator: {
+        s1: { name: 'Dual Slash', desc: 'Double wide arc. 110% ATK, 12% crit.', ctrl: 'Left-click enemy' },
+        s2: { name: 'Cross Slash', desc: 'Massive AoE explosion. 300% ATK.', ctrl: 'Right-click / long-press' }
+      }
+    };
+
     function updateClassCarousel() {
       selectedClass = classes[currentCarouselIndex];
       const cd = CLASS_DATA[selectedClass];
@@ -828,6 +858,11 @@
       document.getElementById('s2-label').textContent =
         (selectedClass==='warrior'?'⚔️':selectedClass==='mage'?'🔥':selectedClass==='archer'?'🎯':'✦') +
         ' S2: ' + cd.s2Name;
+      // Controls section
+      const sk = SKILL_DESC[selectedClass];
+      document.getElementById('controls-section').innerHTML =
+        `<div class="ctrl-line"><span class="ctrl-label">S1:</span> ${sk.s1.ctrl} → <span class="s">${sk.s1.name}</span><br>${sk.s1.desc}</div>` +
+        `<div class="ctrl-line"><span class="ctrl-label">S2:</span> ${sk.s2.ctrl} → <span class="s">${sk.s2.name}</span><br>${sk.s2.desc} <span style="color:#f66">(1s CD)</span></div>`;
       if (gameState === 'PLAYING') {
         player.color = cd.color;
         player.accent = cd.accent;

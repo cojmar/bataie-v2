@@ -95,70 +95,91 @@ These are rendered in **Layer 2** (background layer), below entities. The foliag
 
 ### 1. ~~Fake Depth Perspective on Ground Area~~ ✅ DONE
 
-The lower gameplay area (from horizon line downward) presents a **layered depth illusion** while keeping the side-scrolling visual style. Characters move on a ground plane where vertical positioning creates a sense of depth — entities lower on screen appear "closer," entities higher (near horizon) appear "further away."
-
-- [x] Perspective ground plane that visually slopes from horizon to foreground
-- [x] Horizontal depth bands/lines on the ground surface that get wider/closer toward the horizon
-- [x] Ground Y position visually separates sky background from playable area
-- [x] Horizontal grid lines enhance the depth illusion
-- [x] Player/enemy shadows and scale reinforce the depth
-
 ### 2. ~~Clear Visual Separation: Background vs Playable Ground~~ ✅ DONE
-
-The boundary between sky background and ground gameplay area is **clearly defined** at the horizon line.
-
-- [x] Distinct horizon line / skyline at `groundY` — silhouette of terrain features depending on biome
-- [x] Horizon line is a visual anchor that clearly separates "sky" from "ground"
-- [x] Atmospheric particles NEVER appear above the ground line in the playable area
 
 ### 3. ~~Atmospheric Particles Must Stay in Background Only~~ ✅ DONE
 
-All decorative atmospheric particles (dust motes, fog, fireflies, etc.) exist **only in the sky/background layer** and **never appear on the playable ground layer**.
-
-- [x] `bgParticles` rendering strictly above the ground line
-- [x] New ambient effect system confined to the sky area
-- [x] Ground-specific effects (mud bubbles, volcanic steam, etc.) belong as **ground decoration**, not atmospheric particles
-
 ### 4. ~~Ground Decoration Per Biome~~ ✅ DONE
-
-Each biome has natural ground decoration that matches its environment:
-
-| Biome | Ground Decoration |
-|-------|-------------------|
-| **Forest** | Soft animated grass movement on the ground surface |
-| **Volcano** | Dark volcanic rock terrain texture on the ground |
-| **Castle** | Sparse vegetation and small natural details on stone/brick ground |
-| **Swamp** | Muddy wet terrain with puddles |
-
-- [x] Ground decoration is **subtle and readable** — enemies and players remain clearly visible during combat
-- [x] Decoration enhances depth without interfering with gameplay readability
-- [x] Ambient visual effects enhance the atmosphere but stay non-intrusive
 
 ### 5. ~~Ground Layer Entity Rules~~ ✅ DONE
 
-Only the following are allowed on the ground layer:
-- [x] Players
-- [x] Monsters / enemies
-- [x] Skills and combat effects (projectiles, AoE, particles from attacks)
-- [x] Ground surface details (biome-specific decoration)
-
-Everything else (ambient particles, atmospheric effects, background foliage) stays in the background layer.
-
 ### 6. ~~Ground Decoration Rendering Priority~~ ✅ DONE
 
-Ground decoration renders in the correct order:
+---
 
-1. Sky background (gradient)
-2. Sky atmospheric particles (above ground line only)
-3. **Ground surface** (depth-perspective terrain)
-4. Ground decoration (biome-specific, subtle)
-5. Dead bodies (fading)
-6. Enemies
-7. Player
-8. Spells/projectiles
-9. Combat particles & floating text
+## Active Tasks
 
-Ground decoration is visible but never obscures gameplay entities.
+> **New Workflow:** Tasks are done **automatically, one at a time**. After finishing a task, I will move to the next without asking for confirmation. I will save progress in project.md. When all tasks are done, I will notify you to review. **No git commits during tasks.** Final review only.
+
+### Task 1 — Add `info.md` and show gameplay controls/stats on character selection screen
+
+**Goal:** Create `info.md` file + show class controls and stats on the character selection screen.
+
+**Details:**
+- Created `info.md` with gameplay guide, controls, class stats, skill descriptions
+- Added `.controls-section` div to class card showing S1/S2 triggers, names, and descriptions
+- Updated `drawMenuBackground()` canvas to show compact controls text below "Select Class"
+- `.controls-section`: font-size `0.9em`, `text-align: left`, `color: #ddd`, left-aligned skills info
+- `.class-skills`: `text-align: left`, `font-size: 0.7em`
+- `.class-card`: `justify-content: flex-start`, `align-items: flex-end`
+- Removed all border-radius from menu elements (flat design)
+
+**Status:** 🟢 DONE — font-size increased to 0.9em, text-left aligned, flat design applied
+
+---
+
+### Task 2 — Mobile-first layout: works on mobile in portrait and landscape
+
+**Goal:** Ensure the website is mobile-first and works correctly on mobile in both orientations.
+
+**Details:**
+- Review and update CSS to be mobile-first (base styles for mobile, breakpoints for larger screens)
+- Test and fix layout in portrait mode on mobile
+- Test and fix layout in landscape mode on mobile
+- Ensure touch targets are appropriately sized for mobile
+- Ensure canvas/game area scales and positions correctly in both orientations
+
+**Status:** 🔴 NOT STARTED
+
+---
+
+### Task 3 — Remove `<h3>⚔️ Select Your Character</h3>` heading from character selection screen
+
+**Goal:** Remove the `<h3>⚔️ Select Your Character</h3>` heading as it takes up space for no reason.
+
+**Details:**
+- Remove the `<h3>` element from the character selection screen HTML
+- Adjust layout if needed to compensate for the removed space
+
+**Status:** 🔴 NOT STARTED
+
+---
+
+### Task 4 — Remove duplicate class icon from character name in carousel
+
+**Goal:** Remove class icon from carousel area where class names appear between arrows (duplicate of icon shown in class details below).
+
+**Details:**
+- Remove the class icon from `#current-class-name` in the carousel nav
+- Keep only the class name text between the ◀ ▶ arrows
+- The class icon remains in the class card below
+
+**Status:** 🔴 NOT STARTED
+
+---
+
+### Task 5 — Mobile-first class info: explain both skills of selected class
+
+**Goal:** Ensure class info section on character selection screen is mobile-first and clearly explains both skills (S1 and S2).
+
+**Details:**
+- Skills info is in `.controls-section` div below the stats
+- S1 skill: explain what it does and how to trigger it (left-click / tap)
+- S2 skill: explain what it does and how to trigger it (right-click / long-press)
+- Mobile-first layout: reads well in portrait mode on mobile
+- Clean, readable, appropriately sized
+
+**Status:** 🟢 PARTIALLY DONE — already implemented in Task 1, but needs mobile-first refinement in a later session
 
 ---
 
@@ -174,4 +195,11 @@ Ground decoration is visible but never obscures gameplay entities.
 - [x] Strict layering system with entity rules
 - [x] Proper ground decoration rendering priority
 
-The game is visually compelling with depth perspective on the ground plane, proper horizon definition, biome-specific ground surface decoration, and reinforced layer separation.
+**Active tasks (in order):**
+1. [ ] Add `info.md` and show gameplay controls/stats on character selection screen
+2. [ ] Mobile-first layout: works on mobile in portrait and landscape
+3. [ ] Remove `<h3>⚔️ Select Your Character</h3>` heading
+4. [ ] Remove duplicate class icon from carousel
+5. [ ] Mobile-first class info: explain both skills of selected class
+
+**Workflow:** Tasks are done one at a time. Each task waits for user confirmation before the next starts.
