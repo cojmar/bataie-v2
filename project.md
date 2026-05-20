@@ -139,7 +139,7 @@ These are rendered in **Layer 2** (background layer), below entities. The foliag
 - Ensure touch targets are appropriately sized for mobile
 - Ensure canvas/game area scales and positions correctly in both orientations
 
-**Status:** 🔴 NOT STARTED
+**Status:** 🟢 DONE
 
 ---
 
@@ -148,10 +148,10 @@ These are rendered in **Layer 2** (background layer), below entities. The foliag
 **Goal:** Remove the `<h3>⚔️ Select Your Character</h3>` heading as it takes up space for no reason.
 
 **Details:**
-- Remove the `<h3>` element from the character selection screen HTML
-- Adjust layout if needed to compensate for the removed space
+- Removed the `<h3>` element from the character selection screen HTML
+- Layout adjusted to compensate for the removed space
 
-**Status:** 🔴 NOT STARTED
+**Status:** 🟢 DONE
 
 ---
 
@@ -160,11 +160,11 @@ These are rendered in **Layer 2** (background layer), below entities. The foliag
 **Goal:** Remove class icon from carousel area where class names appear between arrows (duplicate of icon shown in class details below).
 
 **Details:**
-- Remove the class icon from `#current-class-name` in the carousel nav
-- Keep only the class name text between the ◀ ▶ arrows
+- Removed the class icon from `#current-class-name` in the carousel nav
+- Kept only the class name text between the ◀ ▶ arrows
 - The class icon remains in the class card below
 
-**Status:** 🔴 NOT STARTED
+**Status:** 🟢 DONE
 
 ---
 
@@ -196,10 +196,10 @@ These are rendered in **Layer 2** (background layer), below entities. The foliag
 - [x] Proper ground decoration rendering priority
 
 **Active tasks (in order):**
-1. [ ] Add `info.md` and show gameplay controls/stats on character selection screen
-2. [ ] Mobile-first layout: works on mobile in portrait and landscape
-3. [ ] Remove `<h3>⚔️ Select Your Character</h3>` heading
-4. [ ] Remove duplicate class icon from carousel
+1. [x] Add `info.md` and show gameplay controls/stats on character selection screen
+2. [x] Mobile-first layout: works on mobile in portrait and landscape
+3. [x] Remove `<h3>⚔️ Select Your Character</h3>` heading
+4. [x] Remove duplicate class icon from carousel
 5. [ ] Mobile-first class info: explain both skills of selected class
 
 **Workflow:** Tasks are done one at a time. Each task waits for user confirmation before the next starts.
